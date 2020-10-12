@@ -1,0 +1,27 @@
+.card{
+  border-radius: 0;
+  box-shadow: 2px 2px 3px 2px #ececec;
+}
+.card:hover{
+  cursor: pointer;
+  background-color: #f7f7f7;
+}
+.img-szsm {
+  height: 10rem;
+  padding: 5px;
+  object-fit: contain;
+}
+
+.rating{
+  background-color: orange;
+  border-radius: 50%;
+  color:white;
+  padding:2px 10px;
+}
+
+.stock{
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  border-radius: 0;
+}

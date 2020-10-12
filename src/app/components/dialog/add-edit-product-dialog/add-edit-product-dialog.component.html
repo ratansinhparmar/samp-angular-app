@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{product?.product_id ? 'Edit' : 'Add'}} Product</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="productFormGroup">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Title</label>
+                <input type="text" class="form-control" formControlName="title" [ngClass]="{'is-invalid': isInvalid('title')}">
+                <div class="invalid-feedback"> Please enter valid title. </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Description</label>
+                <textarea type="text" class="form-control" formControlName="desc" [ngClass]="{'is-invalid': isInvalid('desc')}"></textarea>
+                <div class="invalid-feedback"> Please enter valid description. </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Price</label>
+                <input type="number" class="form-control" formControlName="price" [ngClass]="{'is-invalid': isInvalid('price')}">
+                <div class="invalid-feedback"> Please enter valid price. </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Image URL</label>
+                <input type="text" class="form-control" formControlName="image_url" [ngClass]="{'is-invalid': isInvalid('image_url')}">
+                <div class="invalid-feedback"> Please enter valid image url. </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Rating</label>
+                <rating class="form-control" formControlName="rating"></rating>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Category</label>
+                <select class="form-control" multiple formControlName="category">
+                    <option [value]="category" *ngFor="let category of categories">{{category}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Location</label>
+                <select class="form-control" multiple formControlName="location_available">
+                    <option [value]="location" *ngFor="let location of locations">{{location}}</option>
+                </select>
+            </div>
+            <div class="form-group stock">
+                <label>Stock</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" formControlName="in_stock" [value]="true">
+                        In Stock
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" formControlName="in_stock" [value]="false">
+                        Out of Stock
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-dark" (click)="bsModalRef.hide()">
+        Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="save()">
+        {{product?.product_id ? 'Update' : 'Save'}}
+    </button>
+</div>

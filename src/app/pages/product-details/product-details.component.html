@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <header class="d-flex">
+        <div class="back-icon">
+            <a class="btn btn-link" routerLink="/home"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+        </div>
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/home">Products</a></li>
+                <li class="breadcrumb-item">{{product?.title | titlecase}}</li>
+            </ol>
+        </nav>
+
+    </header>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <!-- <h4 class="card-title">
+            <button type="button" class="btn btn-success" [routerLink]="['/home']">Show All Products</button>
+            <button type="button" class="btn btn-primary text-right" *ngIf="mode==='VIEW'" (click)="edit()">Edit</button>
+        </h4> -->
+
+        <div class="row">
+            <div class="col-md-4">
+                <img [src]="product?.image_url" [alt]="product?.title" class="img-thumbnail">
+            </div>
+            <div class="col-md-8">
+                <p>{{product.desc}}</p>
+                <p><em [ngClass]="product.in_stock ? 'text-success' : 'text-danger'"> {{product.in_stock ? 'In Stock' : 'Out of Stock'}} </em></p>
+                <p>
+                    <strong>Rating : </strong>
+                    <rating name="rating" [ngModel]="product.rating" [readonly]="true"></rating>
+                </p>
+                <p>
+                    <span class="bg-secondary text-white p-2">{{product.price | currency : 'INR'}} </span>
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label> <strong>Location Available</strong></label>
+                        <ul>
+                            <li *ngFor="let l of product.location_available">{{l | titlecase}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <label> <strong>Category</strong></label>
+                        <ul>
+                            <li *ngFor="let c of product.category">{{c | titlecase}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="floating-btn-edit btn btn-primary" tooltip="Edit Product" (click)="openAddProductModal()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
+    <button class="floating-btn-trash btn btn-danger" (click)="openModal(softDeleteTemplate,product)" tooltip="Delete Product">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </button>
+</div>
+
+<ng-template #softDeleteTemplate>
+    <div class="modal-body text-center pt-6 pb-4">
+        <h3 class="font-weight-light">Please confirm...</h3>
+        <p>Do you really want to delete this product ?</p>
+        <div class="pt-5">
+            <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">No</button>
+            <button type="button" class="btn btn-danger mr-3" (click)="confirm(modalRef.content)">Yes</button>
+        </div>
+    </div>
+</ng-template>

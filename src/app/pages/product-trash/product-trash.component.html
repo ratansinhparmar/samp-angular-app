@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <header class="d-flex justify-content-between align">
+        <div class="form-group mb-0">
+            <input type="text" class="form-control" placeholder="Search..." [formControl]="searchControl">
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <ng-container *ngIf="products$ | async as products">
+                    <div class="col-md-4 p-2" *ngFor="let p of products">
+                        <app-product [product]=p [trashView]="true"></app-product>
+                    </div>
+                    <div class="col-md-12" *ngIf="products.length === 0">
+                        No Data Found
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
